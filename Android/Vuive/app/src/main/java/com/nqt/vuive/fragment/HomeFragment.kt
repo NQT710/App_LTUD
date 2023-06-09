@@ -1,6 +1,7 @@
 package com.nqt.vuive.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,11 +13,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.nqt.vuive.R
+import com.nqt.vuive.activity.ArticlesActivity
 import com.nqt.vuive.databinding.FragmentHomeBinding
 import com.nqt.vuive.databinding.FragmentProfileBinding
 import com.nqt.vuive.viewmodel.AuthViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
 
 
     private lateinit var binding : FragmentHomeBinding
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         return binding.root
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -40,5 +43,27 @@ class HomeFragment : Fragment() {
             context?.let { Glide.with(it).load(data?.avatar).error(R.drawable.avatar_default).into(binding.imgAvatarHome) };
 
         })
+
+        binding.layoutIdentify.setOnClickListener(this@HomeFragment)
+        binding.layoutSpecial.setOnClickListener(this@HomeFragment)
+        binding.layoutArticle.setOnClickListener(this@HomeFragment)
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+//            R.id.layout_identify -> {
+//                startActivity(Intent(context, IdentifyActivity::class.java))
+//                activity?.finish()
+//            }
+//            R.id.layout_special -> {
+//                startActivity(Intent(context, SpecialActivity::class.java))
+//                activity?.finish()
+//            }
+            R.id.layout_article -> {
+                startActivity(Intent(context, ArticlesActivity::class.java))
+                activity?.finish()
+            }
+        }
     }
 }
+
