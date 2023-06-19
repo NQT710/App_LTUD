@@ -34,6 +34,10 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.nqt.vuive.R
+import com.nqt.vuive.activity.OutData
+import com.nqt.vuive.activity.OutDataPhotography
+import com.nqt.vuive.activity.RvAdapterPhotography
+import com.nqt.vuive.activity.RvAdapterPlantsTypes
 
 import com.nqt.vuive.databinding.FragmentHomeBinding
 import com.nqt.vuive.databinding.FragmentProfileBinding
@@ -50,30 +54,30 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-//        val ds= mutableListOf<OutData>()
-//
-//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-//
-//        val recyclerView: RecyclerView =view.findViewById(R.id.rev_plant_type)
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-//        val itemAdapter = RvAdapterPlantsTypes(ds)
-//        recyclerView.adapter = itemAdapter
-//
-//
-//        val dsphotofraphy= mutableListOf<OutDataPhotography>()
-//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-//
-//        val recyclerView2: RecyclerView = view.findViewById(R.id.rev_photography)
-//        recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-//        val itemAdapter2 = RvAdapterPhotography(dsphotofraphy)
-//        recyclerView2.adapter = itemAdapter2
+        val ds= mutableListOf<OutData>()
+
+        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+
+        val recyclerView: RecyclerView =view.findViewById(R.id.rev_plant_type)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        val itemAdapter = RvAdapterPlantsTypes(ds)
+        recyclerView.adapter = itemAdapter
+
+
+        val dsphotofraphy= mutableListOf<OutDataPhotography>()
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+
+        val recyclerView2: RecyclerView = view.findViewById(R.id.rev_photography)
+        recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        val itemAdapter2 = RvAdapterPhotography(dsphotofraphy)
+        recyclerView2.adapter = itemAdapter2
 
         binding = FragmentHomeBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]

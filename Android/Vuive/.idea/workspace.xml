@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05ac63f7-4ec8-4b97-97dc-69a6a9b6e381" name="Changes" comment="test">
-      <changelist_data name="Tran Ngoc Tai" email="tranngoctai28122001@gmail.com" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +52,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Ngoc Tai/AndroidStudioProjects/App_LTUD1/Android/Vuive"
+    "last_opened_file_path": "C:/Users/Ngoc Tai/AndroidStudioProjects/App_LTUD/Android/Vuive/app/src/main/res/drawable"
   },
   "keyToStringList": {
     "ChangesTree.GroupingKeys": [
@@ -62,6 +62,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\res\drawable" />
+      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\res\layout" />
+      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive\activity" />
+      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive\fragment" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="com.nqt.vuive.activity" />
@@ -158,7 +161,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687180363224</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="test">
+      <created>1687180452414</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1687180452414</updated>
+    </task>
+    <task id="LOCAL-00005" summary="test">
+      <created>1687180472875</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687180472875</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
