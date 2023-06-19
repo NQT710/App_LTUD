@@ -32,23 +32,23 @@ class ProfileFragment  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        // Inflate the layout for this fragment
-        pagerTest = view.findViewById(R.id.pagerTest)
-        tabDemo = view.findViewById(R.id.tabDemo)
-        val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
-        pagerTest.adapter = adapter
-        TabLayoutMediator(tabDemo,pagerTest){tab,position ->
-            when(position){
-                0->{
-                    tab.text="ARTICLES"
-                }
-                1->{
-                    tab.text="SPECIES"
-                }
-
-
-            }
-        }.attach()
+//        // Inflate the layout for this fragment
+//        pagerTest = view.findViewById(R.id.pagerTest)
+//        tabDemo = view.findViewById(R.id.tabDemo)
+//        val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+//        pagerTest.adapter = adapter
+//        TabLayoutMediator(tabDemo,pagerTest){tab,position ->
+//            when(position){
+//                0->{
+//                    tab.text="ARTICLES"
+//                }
+//                1->{
+//                    tab.text="SPECIES"
+//                }
+//
+//
+//            }
+//        }.attach()
 
         return view
 

@@ -15,11 +15,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -30,6 +34,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.nqt.vuive.R
+
 import com.nqt.vuive.databinding.FragmentHomeBinding
 import com.nqt.vuive.databinding.FragmentProfileBinding
 import com.nqt.vuive.viewmodel.AuthViewModel
@@ -44,7 +49,31 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+//        val ds= mutableListOf<OutData>()
+//
+//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+//        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
+//
+//        val recyclerView: RecyclerView =view.findViewById(R.id.rev_plant_type)
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+//        val itemAdapter = RvAdapterPlantsTypes(ds)
+//        recyclerView.adapter = itemAdapter
+//
+//
+//        val dsphotofraphy= mutableListOf<OutDataPhotography>()
+//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+//        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
+//
+//        val recyclerView2: RecyclerView = view.findViewById(R.id.rev_photography)
+//        recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+//        val itemAdapter2 = RvAdapterPhotography(dsphotofraphy)
+//        recyclerView2.adapter = itemAdapter2
 
         binding = FragmentHomeBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
@@ -52,7 +81,7 @@ class HomeFragment : Fragment() {
             cameraCheckPermission()
         }
 
-        return binding.root
+        return view
     }
 
     @SuppressLint("SetTextI18n")
@@ -82,7 +111,6 @@ class HomeFragment : Fragment() {
 
                         }
                     }
-
                     override fun onPermissionRationaleShouldBeShown(
                         p0: MutableList<PermissionRequest>?,
                         p1: PermissionToken?) {
@@ -94,8 +122,9 @@ class HomeFragment : Fragment() {
     }
     private fun camera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA_REQUEST_CODE)
+        contract.launch(intent)
     }
+
     private fun showRotationalDialogForPermission() {
         AlertDialog.Builder(requireActivity())
             .setMessage("It looks like you have turned off permissions"
@@ -118,64 +147,22 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
             }.show()
     }
-    private fun galleryCheckPermission() {
 
-        Dexter.withContext(requireActivity()).withPermission(
-            android.Manifest.permission.READ_EXTERNAL_STORAGE
-        ).withListener(object : PermissionListener {
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                gallery()
+    @SuppressLint("ResourceType")
+    private val contract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val resultCode = result.resultCode
+        val data = result.data
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            // Xử lý kết quả thành công và dữ liệu trả về từ Camera
+            val imageBitmap: Bitmap? = data.extras?.get("data") as Bitmap?
+            binding.imgAvatarHome.load(imageBitmap) {
+                crossfade(true)
+                crossfade(1000)
+                transformations(CircleCropTransformation())
             }
-
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                Toast.makeText(
-                    requireContext(),
-                    "You have denied the storage permission to select image",
-                    Toast.LENGTH_SHORT
-                ).show()
-                showRotationalDialogForPermission()
-            }
-
-            override fun onPermissionRationaleShouldBeShown(
-                p0: PermissionRequest?, p1: PermissionToken?) {
-                showRotationalDialogForPermission()
-            }
-        }).onSameThread().check()
-    }
-
-    private fun gallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        registerForActivityResult(intent, GALLERY_REQUEST_CODE)
-
-    }
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK) {
-
-            when (requestCode) {
-
-                CAMERA_REQUEST_CODE -> {
-
-                    val bitmap = data?.extras?.get("data") as Bitmap
-
-                    //we are using coroutine image loader (coil)
-                    binding.imgAvatarHome.setImageBitmap(bitmap)
-                }
-
-                GALLERY_REQUEST_CODE -> {
-
-                    binding.imgAvatarHome.load(data?.data) {
-                        crossfade(true)
-                        crossfade(1000)
-                        // transformations(CircleCropTransformation())
-                    }
-
-                }
-            }
+        } else {
 
         }
-
     }
+
 }
