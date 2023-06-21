@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -34,6 +36,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.nqt.vuive.R
+import com.nqt.vuive.activity.MainActivity
 import com.nqt.vuive.activity.OutData
 import com.nqt.vuive.activity.OutDataPhotography
 import com.nqt.vuive.activity.RvAdapterPhotography
@@ -48,11 +51,13 @@ class HomeFragment : Fragment() {
     private val CAMERA_REQUEST_CODE = 1
     private lateinit var binding : FragmentHomeBinding
 
+    private lateinit var mainActivity: MainActivity
     private lateinit var viewModel: AuthViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainActivity = activity as MainActivity
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val ds= mutableListOf<OutData>()
 
@@ -62,6 +67,7 @@ class HomeFragment : Fragment() {
         ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
 
         val recyclerView: RecyclerView =view.findViewById(R.id.rev_plant_type)
+
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
         val itemAdapter = RvAdapterPlantsTypes(ds)
         recyclerView.adapter = itemAdapter
@@ -81,11 +87,12 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
-        binding.layoutIdentify.setOnClickListener {
+     //  val layoutIdentify : LinearLayout =view.findViewById(R.id.layout_identify)
+        binding. layoutIdentify .setOnClickListener {
+
             cameraCheckPermission()
         }
-
-        return view
+        return binding.root
     }
 
     @SuppressLint("SetTextI18n")
@@ -129,6 +136,34 @@ class HomeFragment : Fragment() {
         contract.launch(intent)
     }
 
+
+
+    @SuppressLint("ResourceType")
+    private val contract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val resultCode = result.resultCode
+        val data = result.data
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            // Xử lý kết quả thành công và dữ liệu trả về từ Camera
+
+            val imageBitmap: Bitmap? = data.extras?.get("data") as Bitmap?
+
+//            // Tạo Bundle và truyền dữ liệu
+               val bundle = Bundle()
+               bundle.putParcelable("imageBitmap", imageBitmap)
+//
+//            // Chuyển đổi sang màn hình khác với Bundle dữ liệu
+//            val intent = Intent(requireContext(), fragment1::class.java)
+//            intent.putExtras(bundle)
+//            startActivity(intent)
+          //  Toast.makeText(requireContext(), "hello"+imageBitmap, Toast.LENGTH_SHORT).show()
+
+            if (imageBitmap != null) {
+                mainActivity.switchToFragmentTwo(imageBitmap)
+            }
+        } else {
+
+        }
+    }
     private fun showRotationalDialogForPermission() {
         AlertDialog.Builder(requireActivity())
             .setMessage("It looks like you have turned off permissions"
@@ -151,22 +186,4 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
             }.show()
     }
-
-    @SuppressLint("ResourceType")
-    private val contract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        val resultCode = result.resultCode
-        val data = result.data
-        if (resultCode == Activity.RESULT_OK && data != null) {
-            // Xử lý kết quả thành công và dữ liệu trả về từ Camera
-            val imageBitmap: Bitmap? = data.extras?.get("data") as Bitmap?
-            binding.imgAvatarHome.load(imageBitmap) {
-                crossfade(true)
-                crossfade(1000)
-                transformations(CircleCropTransformation())
-            }
-        } else {
-
-        }
-    }
-
 }

@@ -9,7 +9,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05ac63f7-4ec8-4b97-97dc-69a6a9b6e381" name="Changes" comment="commit final" />
+    <list default="true" id="05ac63f7-4ec8-4b97-97dc-69a6a9b6e381" name="Changes" comment="add profile">
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/activity/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/activity/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/fragment/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/fragment/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fragment2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fragment2.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Ngoc Tai/AndroidStudioProjects/App_LTUD/Android/Vuive/app/src/main/res/drawable"
+    "last_opened_file_path": "C:/Users/Ngoc Tai/AndroidStudioProjects/suitapplication"
   },
   "keyToStringList": {
     "ChangesTree.GroupingKeys": [
@@ -66,8 +75,8 @@
       <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive\fragment" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="com.nqt.vuive.activity" />
       <recent name="com.nqt.vuive.fragment" />
+      <recent name="com.nqt.vuive.activity" />
     </key>
   </component>
   <component name="RunManager">
@@ -223,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687182514245</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add profile">
+      <created>1687183117886</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1687183117886</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -241,6 +257,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="commit" />
     <MESSAGE value="commit final" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit final" />
+    <MESSAGE value="add profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="add profile" />
   </component>
 </project>
