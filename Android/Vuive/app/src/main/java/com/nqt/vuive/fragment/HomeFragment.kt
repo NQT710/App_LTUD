@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater)
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
-     //  val layoutIdentify : LinearLayout =view.findViewById(R.id.layout_identify)
+        //  val layoutIdentify : LinearLayout =view.findViewById(R.id.layout_identify)
         binding. layoutIdentify .setOnClickListener {
 
             cameraCheckPermission()
@@ -148,14 +148,14 @@ class HomeFragment : Fragment() {
             val imageBitmap: Bitmap? = data.extras?.get("data") as Bitmap?
 
 //            // Tạo Bundle và truyền dữ liệu
-               val bundle = Bundle()
-               bundle.putParcelable("imageBitmap", imageBitmap)
+            val bundle = Bundle()
+            bundle.putParcelable("imageBitmap", imageBitmap)
 //
 //            // Chuyển đổi sang màn hình khác với Bundle dữ liệu
 //            val intent = Intent(requireContext(), fragment1::class.java)
 //            intent.putExtras(bundle)
 //            startActivity(intent)
-          //  Toast.makeText(requireContext(), "hello"+imageBitmap, Toast.LENGTH_SHORT).show()
+            //  Toast.makeText(requireContext(), "hello"+imageBitmap, Toast.LENGTH_SHORT).show()
 
             if (imageBitmap != null) {
                 mainActivity.switchToFragmentTwo(imageBitmap)

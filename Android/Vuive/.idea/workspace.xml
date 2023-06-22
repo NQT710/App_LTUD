@@ -9,15 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05ac63f7-4ec8-4b97-97dc-69a6a9b6e381" name="Changes" comment="add profile">
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="05ac63f7-4ec8-4b97-97dc-69a6a9b6e381" name="Changes" comment="fix Camera">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/activity/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/activity/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/fragment/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/fragment/HomeFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fragment2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_fragment2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_new_plant_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_add_new_plant_detail.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +27,14 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Data Class" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -58,6 +63,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cidr.known.project.marker": "true",
     "last_opened_file_path": "C:/Users/Ngoc Tai/AndroidStudioProjects/suitapplication"
   },
@@ -69,14 +75,17 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\res\drawable" />
       <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\res\layout" />
+      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\res\drawable" />
       <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive\activity" />
       <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive\fragment" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ngoc Tai\AndroidStudioProjects\App_LTUD\Android\Vuive\app\src\main\java\com\nqt\vuive" />
+    </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
-      <recent name="com.nqt.vuive.fragment" />
       <recent name="com.nqt.vuive.activity" />
+      <recent name="com.nqt.vuive.fragment" />
     </key>
   </component>
   <component name="RunManager">
@@ -239,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687183117886</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix Camera">
+      <created>1687359101318</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1687359101318</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix Camera">
+      <created>1687359297304</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687359297304</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -258,6 +281,22 @@
     <MESSAGE value="commit" />
     <MESSAGE value="commit final" />
     <MESSAGE value="add profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="add profile" />
+    <MESSAGE value="fix Camera" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix Camera" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-function">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/nqt/vuive/data/FakeData.kt</url>
+          <line>6</line>
+          <properties class="com.nqt.vuive.data.FakeData" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

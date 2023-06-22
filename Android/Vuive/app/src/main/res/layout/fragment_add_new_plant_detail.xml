@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/back_gound_profile"
+    android:background="#FBFDFF"
     tools:context=".fragment.addNewPlantDetail">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="20dp"
         android:layout_weight="3"
         android:gravity="center|center_horizontal"
         android:orientation="vertical"
@@ -23,10 +22,11 @@
             android:layout_marginTop="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/tho7mau5"
-            app:riv_corner_radius="10dp"></com.makeramen.roundedimageview.RoundedImageView>
+       ></com.makeramen.roundedimageview.RoundedImageView>
 
 
     </LinearLayout>
+
 
 
 
@@ -35,11 +35,47 @@
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvaddNewPlant"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Adding New "
+            android:textColor="#36455A"
+            android:textStyle="bold"
+            >
+
+        </TextView>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:hint="Name of plant  "
+            android:textStyle="bold"
+            >
+
+        </EditText>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="20dp"
+            android:hint="Name of Species  "
+            android:textStyle="bold"
+            >
+        </EditText>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_button"
+            android:text="Add Plant"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white" />
+ >
 
 
     </LinearLayout>

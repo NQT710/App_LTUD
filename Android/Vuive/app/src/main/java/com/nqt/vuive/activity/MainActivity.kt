@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-         HomeFragment = HomeFragment()
-         addNewPlantDetail=addNewPlantDetail()
+        HomeFragment = HomeFragment()
+        addNewPlantDetail=addNewPlantDetail()
         replaceFragment(HomeFragment())
         supportFragmentManager.beginTransaction()
             .replace(R.id.frame_layout, HomeFragment)
