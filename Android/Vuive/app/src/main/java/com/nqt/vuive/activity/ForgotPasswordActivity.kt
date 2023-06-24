@@ -72,7 +72,7 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener  {
                 }
                 is Status.Success -> {
                     binding.progressForgot.visibility = View.GONE
-                    Toast.makeText(this, "Please check your email to reset your password!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Please test check your email to reset your password!", Toast.LENGTH_LONG).show()
                 }
                 is Status.Error -> {
                     binding.progressForgot.visibility = View.GONE

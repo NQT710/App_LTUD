@@ -3,6 +3,7 @@ package com.nqt.vuive.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.nqt.vuive.databinding.ActivityLoginBinding
 import com.nqt.vuive.databinding.ActivityMainBinding
 import com.nqt.vuive.fragment.HomeFragment
 import com.nqt.vuive.fragment.ProfileFragment
+import com.nqt.vuive.model.MySQLConnector
 import com.nqt.vuive.viewmodel.AuthViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -43,6 +45,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+        val connector = MySQLConnector()
+        val connection = connector.getConnection()
+        if (connection != null) {
+            // Kết nối thành công
+            // Tiến hành thực hiện các thao tác với MySQL
+            Log.d("TAG", "pass")
+        } else {
+            // Kết nối thất bại
+            Log.d("TAG", "false")
         }
     }
 
