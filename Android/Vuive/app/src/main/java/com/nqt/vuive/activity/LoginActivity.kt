@@ -46,9 +46,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
         }
         viewModel.loadSavedLoginInfo()
         notification()
-//debug_s
-        startActivity(Intent(this, MainActivity::class.java))
-//debug_e
     }
 
     private fun notification() {
@@ -99,8 +96,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
                 viewModel.logIn(email,password, rememberMe)
 
             }
-            R.id.tv_signup ->startActivity(Intent((this), MainActivity::class.java))
-            //R.id.tv_signup -> startActivity(Intent(this, SignUpActivity::class.java))
+            R.id.tv_signup -> startActivity(Intent(this, SignUpActivity::class.java))
             R.id.tv_forgot_password -> startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }

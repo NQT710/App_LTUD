@@ -153,6 +153,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 .addOnSuccessListener { document ->
                     val avatar = document.get("avatar", String::class.java)
                     val name = document.get("name", String::class.java)
+                    val locate = document.get("avartar", String::class.java)
                     val data = document.toObject(UserSignUp::class.java)
 
 
