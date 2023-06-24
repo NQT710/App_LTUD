@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vuive</string>
+    <string name="app_name">Plant App</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_intro_1">Identify Plants</string>
     <string name="title_intro_2">Learn Many Plants Species</string>

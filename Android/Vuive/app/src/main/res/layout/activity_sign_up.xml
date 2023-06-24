@@ -49,6 +49,25 @@
                 tools:ignore="RtlSymmetry,TextContrastCheck,UnusedAttribute" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edt_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:hint="Location"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="bottom"
+                android:inputType="textEmailAddress"
+                android:paddingStart="0dp"
+                android:textColor="@color/black"
+                tools:ignore="RtlSymmetry,TextContrastCheck,UnusedAttribute" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edt_email_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

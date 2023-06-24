@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.nqt.vuive.R
 import com.nqt.vuive.databinding.ActivityForgotPasswordBinding
 import com.nqt.vuive.databinding.ActivitySignUpBinding
+import com.nqt.vuive.model.NetworkUtils
 import com.nqt.vuive.model.UserSignUp
 import com.nqt.vuive.viewmodel.AuthViewModel
 import com.nqt.vuive.viewmodel.Status
@@ -47,19 +48,24 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener  {
             }
 
             R.id.btn_send_email -> {
-                val email = binding.edtEmailForgot.editText?.text.toString().trim()
+                if(NetworkUtils.isInternetConnected(this)){
+                    val email = binding.edtEmailForgot.editText?.text.toString().trim()
 
-                if (email.isEmpty()){
-                    binding.edtEmailForgot.error = "Email is required!"
-                    //binding.edtEmailSignup.requestFocus()
-                    return
+                    if (email.isEmpty()){
+                        binding.edtEmailForgot.error = "Email is required!"
+                        //binding.edtEmailSignup.requestFocus()
+                        return
+                    }
+                    if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                        binding.edtEmailForgot.error = "Pleas provide valid email!"
+                        //binding.edtEmailSignup.requestFocus()
+                        return
+                    }
+                    viewModel.forgotPassword(email)
+                }else{
+                    Toast.makeText(this, "Internet is not connected", Toast.LENGTH_LONG).show()
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    binding.edtEmailForgot.error = "Pleas provide valid email!"
-                    //binding.edtEmailSignup.requestFocus()
-                    return
-                }
-                viewModel.forgotPassword(email)
+
 
             }
         }

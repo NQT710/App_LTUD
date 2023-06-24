@@ -11,4 +11,5 @@
     <color name="icon_no_checked">#D2D2D2</color>
     <!-- Fully transparent, equivalent to 0x00000000 -->
     <color name="transparent">#00000000</color>
+    <color name="submerged_text">#26FFFFFF</color>
 </resources>

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.nqt.vuive.R
 import com.nqt.vuive.databinding.ActivityLoginBinding
 import com.nqt.vuive.databinding.ActivityOnboardingBinding
+import com.nqt.vuive.model.NetworkUtils
 import com.nqt.vuive.model.UserSignUp
 import com.nqt.vuive.viewmodel.AuthViewModel
 import com.nqt.vuive.viewmodel.Status
@@ -19,6 +20,7 @@ import com.nqt.vuive.viewmodel.Status
 class LoginActivity : AppCompatActivity(), View.OnClickListener{
 
     private lateinit var binding : ActivityLoginBinding
+
 
     private lateinit var viewModel: AuthViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,30 +72,35 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener{
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.btn_login -> {
-                val email = binding.edtEmailLogin.editText?.text.toString().trim()
-                val password = binding.edtPasswordLogin.editText?.text.toString().trim()
-                val rememberMe = binding.checkbox.isChecked
-                if (email.isEmpty()){
-                    binding.edtEmailLogin.error = "Email is required!"
-                    //binding.edtEmailSignup.requestFocus()
-                    return
+
+                if(NetworkUtils.isInternetConnected(this)){
+                    val email = binding.edtEmailLogin.editText?.text.toString().trim()
+                    val password = binding.edtPasswordLogin.editText?.text.toString().trim()
+                    val rememberMe = binding.checkbox.isChecked
+                    if (email.isEmpty()){
+                        binding.edtEmailLogin.error = "Email is required!"
+                        //binding.edtEmailSignup.requestFocus()
+                        return
+                    }
+                    if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                        binding.edtEmailLogin.error = "Pleas provide valid email!"
+                        //binding.edtEmailSignup.requestFocus()
+                        return
+                    }
+                    if (password.isEmpty()){
+                        binding.edtPasswordLogin.error = "Password is required!"
+                        //binding.edtPasswordSignup.requestFocus()
+                        return
+                    }
+                    if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%!\\-_?&./])(?=\\S+\$).{11,}".toRegex())){
+                        binding.edtPasswordLogin.error = "Invalid password"
+                        //binding.edtPasswordSignup.requestFocus()
+                        return
+                    }
+                    viewModel.logIn(email,password, rememberMe)
+                }else{
+                    Toast.makeText(this, "Internet is not connected", Toast.LENGTH_LONG).show()
                 }
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    binding.edtEmailLogin.error = "Pleas provide valid email!"
-                    //binding.edtEmailSignup.requestFocus()
-                    return
-                }
-                if (password.isEmpty()){
-                    binding.edtPasswordLogin.error = "Password is required!"
-                    //binding.edtPasswordSignup.requestFocus()
-                    return
-                }
-                if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#\$%!\\-_?&./])(?=\\S+\$).{11,}".toRegex())){
-                    binding.edtPasswordLogin.error = "Invalid password"
-                    //binding.edtPasswordSignup.requestFocus()
-                    return
-                }
-                viewModel.logIn(email,password, rememberMe)
 
             }
             R.id.tv_signup -> startActivity(Intent(this, SignUpActivity::class.java))
