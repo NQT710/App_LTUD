@@ -81,10 +81,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun plant(){
         val ds= mutableListOf<OutData>()
 
-        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle2,"Bonsai Plants","224 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle3,"Decor Plants","123 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle4,"Garden Plants","38 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle1.toString(),"Home Plants","68 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle2.toString(),"Bonsai Plants","224 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle3.toString(),"Decor Plants","123 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle4.toString(),"Garden Plants","38 types of plants"))
 
         val recyclerView: RecyclerView = binding.revPlantType
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
