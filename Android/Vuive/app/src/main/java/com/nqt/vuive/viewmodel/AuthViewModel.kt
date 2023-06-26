@@ -8,12 +8,18 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
+import com.nqt.vuive.R
 import com.nqt.vuive.model.UserSignUp
+import com.nqt.vuive.model.Articles
 import kotlin.math.log
+import androidx.lifecycle.ViewModel
+import com.nqt.vuive.model.Species
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -35,6 +41,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+
+    val articlesList = MutableLiveData<ArrayList<Articles>>()
+    val speciesList = MutableLiveData<ArrayList<Species>>()
 
     fun signUp(user: UserSignUp, password: String) {
         _signUpStatus.value = Status.Loading
@@ -131,21 +140,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun loadData() {
-//        val id = mAuth.currentUser?.uid
-//        Log.i("TAG_I", "loadData: id = $id")
-//
-//        id?.let {
-//            database.collection("user")
-//                .document(it).collection("User").document().get()
-//                .addOnSuccessListener { document ->
-//                    val avatar = document.get("avatar", String::class.java)
-//                    val name = document.get("name", String::class.java)
-//                    Log.i("TAG_I", "name: + $name")
-//                }
-//                .addOnFailureListener { exception ->
-//                    // Handle any errors here
-//                }
-//        }
         val id = mAuth.currentUser?.uid
         Log.i("TAG_I", "loadData: id = $id")
         id?.let {
@@ -153,11 +147,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 .addOnSuccessListener { document ->
                     val avatar = document.get("avatar", String::class.java)
                     val name = document.get("name", String::class.java)
-                    val locate = document.get("avartar", String::class.java)
+                    val location = document.get("location", String::class.java)
+                    val article = document.get("article") as? ArrayList<String>
+                    val species = document.get("species") as? ArrayList<String>
                     val data = document.toObject(UserSignUp::class.java)
-
-
-                    Log.i("TAG_I", "name: + $name")
                     _loadStatus.value = data
                 }
                 .addOnFailureListener { exception ->
@@ -165,7 +158,60 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 }
         }
     }
+    fun saveData(data: UserSignUp) {
+        val id = mAuth.currentUser?.uid
+        data.email = (_loadStatus.value?.email ?: String) as String
+        data.article = _loadStatus.value?.article ?: ArrayList()
+        data.species = _loadStatus.value?.species ?: ArrayList()
+        id?.let {
+            database.collection("user").document(it).set(data)
+                .addOnSuccessListener { document ->
 
+                }
+                .addOnFailureListener { exception ->
+                    // Handle any errors here
+                }
+        }
+    }
+    fun loadArticles(data: UserSignUp){
+        val listArticles = ArrayList<Articles>()
+        database.collection("articles").get()
+            .addOnSuccessListener { querySnapshot  ->
+                for (documentSnapshot in querySnapshot) {
+                    for (id in data.article) {
+                        if(id == documentSnapshot.id)
+                        {
+                            val data = documentSnapshot.toObject(Articles::class.java)
+                            listArticles.add(data)
+                        }
+                    }
+                    articlesList.value = listArticles
+                }
+
+            }
+            .addOnFailureListener {
+            }
+    }
+
+    fun loadSpecies(data: UserSignUp){
+        val listArticles = ArrayList<Species>()
+        database.collection("species").get()
+            .addOnSuccessListener { querySnapshot  ->
+                for (documentSnapshot in querySnapshot) {
+                    for (id in data.species) {
+                        if(id == documentSnapshot.id)
+                        {
+                            val data = documentSnapshot.toObject(Species::class.java)
+                            listArticles.add(data)
+                        }
+                    }
+                    speciesList.value = listArticles
+                }
+
+            }
+            .addOnFailureListener {
+            }
+    }
 }
 
 sealed class Status {

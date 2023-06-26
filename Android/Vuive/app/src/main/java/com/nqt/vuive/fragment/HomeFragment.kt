@@ -2,11 +2,12 @@ package com.nqt.vuive.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.graphics.Bitmap
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
@@ -14,83 +15,52 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.single.PermissionListener
 import com.nqt.vuive.R
+import com.nqt.vuive.activity.ArticlesActivity
 import com.nqt.vuive.activity.MainActivity
-import com.nqt.vuive.activity.OutData
-import com.nqt.vuive.activity.OutDataPhotography
-import com.nqt.vuive.activity.RvAdapterPhotography
-import com.nqt.vuive.activity.RvAdapterPlantsTypes
-
+import com.nqt.vuive.adapter.RvAdapterPhotography
+import com.nqt.vuive.adapter.RvAdapterPlantsTypes
+import com.nqt.vuive.databinding.ActivityMainBinding
 import com.nqt.vuive.databinding.FragmentHomeBinding
 import com.nqt.vuive.databinding.FragmentProfileBinding
+import com.nqt.vuive.model.OutData
+import com.nqt.vuive.model.OutDataPhotography
 import com.nqt.vuive.viewmodel.AuthViewModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), View.OnClickListener {
+
     private val GALLERY_REQUEST_CODE = 2
     private val CAMERA_REQUEST_CODE = 1
+    private lateinit var mainActivity: MainActivity
+
+    private lateinit var fragmentSpecies: SpeciesFragment
+
     private lateinit var binding : FragmentHomeBinding
 
-    private lateinit var mainActivity: MainActivity
     private lateinit var viewModel: AuthViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mainActivity = activity as MainActivity
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val ds= mutableListOf<OutData>()
-
-        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-        ds.add(OutData(R.drawable.plant_typle1,"Home Plants","68 types of plants"))
-
-        val recyclerView: RecyclerView =view.findViewById(R.id.rev_plant_type)
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-        val itemAdapter = RvAdapterPlantsTypes(ds)
-        recyclerView.adapter = itemAdapter
-
-
-        val dsphotofraphy= mutableListOf<OutDataPhotography>()
-        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"Mini"))
-
-        val recyclerView2: RecyclerView = view.findViewById(R.id.rev_photography)
-        recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
-        val itemAdapter2 = RvAdapterPhotography(dsphotofraphy)
-        recyclerView2.adapter = itemAdapter2
-
         binding = FragmentHomeBinding.inflate(inflater)
+        mainActivity = activity as MainActivity
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
-        //  val layoutIdentify : LinearLayout =view.findViewById(R.id.layout_identify)
-        binding. layoutIdentify .setOnClickListener {
-            cameraCheckPermission()
-        }
+        photography()
+        plant()
         return binding.root
     }
 
@@ -100,9 +70,42 @@ class HomeFragment : Fragment() {
         viewModel.loadData()
         viewModel.loadStatus.observe(viewLifecycleOwner, Observer { data ->
             binding.tvName.text = data?.name + ","
-            context?.let { Glide.with(it).load(data?.avatar).error(R.drawable.avatar_default).into(binding.imgAvatarHome) };
+            context?.let { Glide.with(it).load(data?.avatar).error(R.drawable.avatar_default).into(binding.imgAvatarHome) }
+
         })
+        binding.layoutIdentify.setOnClickListener(this@HomeFragment)
+        binding.layoutSpecies.setOnClickListener(this@HomeFragment)
+        binding.layoutArticle.setOnClickListener(this@HomeFragment)
     }
+
+    private fun plant(){
+        val ds= mutableListOf<OutData>()
+
+        ds.add(OutData(R.drawable.plant_typle1.toString(),"Home Plants","68 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle2.toString(),"Bonsai Plants","224 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle3.toString(),"Decor Plants","123 types of plants"))
+        ds.add(OutData(R.drawable.plant_typle4.toString(),"Garden Plants","38 types of plants"))
+
+        val recyclerView: RecyclerView = binding.revPlantType
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        val itemAdapter = RvAdapterPlantsTypes(ds)
+        recyclerView.adapter = itemAdapter
+    }
+
+    private fun photography(){
+        val dsphotofraphy= mutableListOf<OutDataPhotography>()
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography1,"#Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography2,"#Cute"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography3,"#Mini"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography4,"#Cute"))
+        dsphotofraphy.add(OutDataPhotography(R.drawable.photography5,"#Mini"))
+
+        val recyclerView2: RecyclerView = binding.revPhotography
+        recyclerView2.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL,false)
+        val itemAdapter2 = RvAdapterPhotography(dsphotofraphy)
+        recyclerView2.adapter = itemAdapter2
+    }
+
     private fun cameraCheckPermission() {
 
         Dexter.withContext(requireActivity())
@@ -117,7 +120,6 @@ class HomeFragment : Fragment() {
                             if (report.areAllPermissionsGranted()) {
                                 camera()
                             }
-
                         }
                     }
                     override fun onPermissionRationaleShouldBeShown(
@@ -125,7 +127,6 @@ class HomeFragment : Fragment() {
                         p1: PermissionToken?) {
                         showRotationalDialogForPermission()
                     }
-
                 }
             ).onSameThread().check()
     }
@@ -133,7 +134,6 @@ class HomeFragment : Fragment() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         contract.launch(intent)
     }
-
 
 
     @SuppressLint("ResourceType")
@@ -184,4 +184,25 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
             }.show()
     }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.layout_identify -> {
+                cameraCheckPermission()
+            }
+            R.id.layout_species -> {
+                fragmentSpecies = SpeciesFragment()
+                val fragmentManager = requireActivity().supportFragmentManager
+                val fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.frame_layout, fragmentSpecies)
+                fragmentTransaction.addToBackStack(null)
+                fragmentTransaction.commit()
+            }
+            R.id.layout_article -> {
+                startActivity(Intent(context, ArticlesActivity::class.java))
+                activity?.finish()
+            }
+        }
+    }
 }
+

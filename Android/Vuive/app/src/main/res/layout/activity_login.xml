@@ -106,7 +106,7 @@
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/back_gound_profile"
+                android:background="@drawable/bg_button"
                 android:text="Login"
                 android:textColor="@color/white" />
             <!--            android:textAllCaps="false"-->

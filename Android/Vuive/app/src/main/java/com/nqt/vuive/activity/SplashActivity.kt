@@ -1,13 +1,19 @@
 package com.nqt.vuive.activity
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Toast
 import com.nqt.vuive.R
 import com.nqt.vuive.onboard.OnboardingActivity
+import org.checkerframework.checker.units.qual.Length
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var onboardingScreen : SharedPreferences
@@ -37,4 +43,5 @@ class SplashActivity : AppCompatActivity() {
 
         }, 3000)
     }
+
 }
